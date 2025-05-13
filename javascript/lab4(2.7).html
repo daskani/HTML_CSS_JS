@@ -1,0 +1,23 @@
+<html>
+<body>
+    <h2>Upload an Image</h2>
+    <label for="imageUpload">Choose an image:</label>
+    <input type="file" id="imageUpload" accept="image/*" onchange="previewImage()">
+    <h3>Image Preview:</h3>
+    <img id="imagePreview" style="max-width: 300px; max-height: 300px;" />
+    <script>
+        function previewImage() {
+            const file = document.getElementById("imageUpload").files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                document.getElementById("imagePreview").src = e.target.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
