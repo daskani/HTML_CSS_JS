@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Paginated Table</title>
+</head>
+<body>
+
+    <h2>Paginated Table</h2>
+
+    <table border="1" id="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <button onclick="prevPage()">Previous</button>
+    <span id="pageNum">Page 1</span>
+    <button onclick="nextPage()">Next</button>
+
+    <script>
+        const data = [
+            { name: "John", age: 25 },
+            { name: "Jane", age: 30 },
+            { name: "Sam", age: 22 },
+            { name: "Chris", age: 35 },
+            { name: "Alex", age: 28 },
+            { name: "Emily", age: 27 },
+            { name: "Michael", age: 40 },
+            { name: "Sarah", age: 33 },
+            { name: "David", age: 26 },
+            { name: "Laura", age: 29 }
+        ];
+
+        const rowsPerPage = 3;
+        let currentPage = 1;
+
+        function displayTable() {
+            const tableBody = document.querySelector("#table tbody");
+            tableBody.innerHTML = "";
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const pageData = data.slice(startIndex, endIndex);
+
+            pageData.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${item.name}</td><td>${item.age}</td>`;
+                tableBody.appendChild(row);
+            });
+
+            document.getElementById("pageNum").textContent = `Page ${currentPage}`;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayTable();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage * rowsPerPage < data.length) {
+                currentPage++;
+                displayTable();
+            }
+        }
+        displayTable();
+    </script>
+
+</body>
+</html>

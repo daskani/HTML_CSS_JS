@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .faq-container {
+            width: 60%;
+            margin: auto;
+            text-align: left;
+        }
+        .faq-question {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            outline: none;
+            width: 100%;
+            text-align: left;
+        }
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #fff;
+            border-left: 3px solid #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>FAQ Section</h2>
+    <div class="faq-container">
+        <button class="faq-question">What is JavaScript?</button>
+        <div class="faq-answer">JavaScript is a programming language used to create dynamic content on websites.</div>
+
+        <button class="faq-question">How does collapsible FAQ work?</button>
+        <div class="faq-answer">Each question is a button, and clicking on it toggles the visibility of the corresponding answer.</div>
+
+        <button class="faq-question">Can I use this without JavaScript?</button>
+        <div class="faq-answer">No, JavaScript is required to handle the expanding and collapsing functionality.</div>
+    </div>
+
+    <script>
+        document.querySelectorAll(".faq-question").forEach(button => {
+            button.addEventListener("click", function() {
+                let answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+
+</body>
+</html>

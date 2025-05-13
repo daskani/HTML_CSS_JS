@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Table Update</title>
+</head>
+<body>
+
+    <h2>Update Table</h2>
+    <input type="number" id="row" placeholder="Row (0-based index)">
+    <input type="number" id="col" placeholder="Column (0-based index)">
+    <input type="text" id="content" placeholder="New Content">
+    <button onclick="updateTable()">Update</button>
+
+    <table border="1" id="dataTable">
+        <tr>
+            <td>Row 0, Col 0</td>
+            <td>Row 0, Col 1</td>
+        </tr>
+        <tr>
+            <td>Row 1, Col 0</td>
+            <td>Row 1, Col 1</td>
+        </tr>
+    </table>
+
+    <script>
+        function updateTable() {
+            let row = document.getElementById("row").value;
+            let col = document.getElementById("col").value;
+            let newContent = document.getElementById("content").value;
+
+            let table = document.getElementById("dataTable");
+
+            if (row < table.rows.length && col < table.rows[0].cells.length) {
+                table.rows[row].cells[col].textContent = newContent;
+            } else {
+                alert("Invalid row or column index!");
+            }
+        }
+    </script>
+
+</body>
+</html>

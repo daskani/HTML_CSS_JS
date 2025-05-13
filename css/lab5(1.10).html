@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Moving Square</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            height: 100px;
+            margin: auto;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            transition: transform 1s ease-in-out;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Click the Button to Move the Square</h2>
+
+    <div class="container">
+        <div class="square" id="square"></div>
+    </div>
+
+    <button id="moveButton">Move Square</button>
+
+    <script>
+        let moved = false;
+        document.getElementById("moveButton").addEventListener("click", function() {
+            let square = document.getElementById("square");
+            moved = !moved;
+            square.style.transform = moved ? "translateX(90%)" : "translateX(0)";
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Tree Menu</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .collapsible {
+            display: none;
+        }
+
+        .expand-icon {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        li:hover {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h2>Expandable Tree Navigation Menu</h2>
+
+    <ul>
+        <li>
+            <span class="expand-icon">+</span> Home
+            <ul class="collapsible">
+                <li>Dashboard</li>
+                <li>Profile</li>
+                <li>Settings</li>
+            </ul>
+        </li>
+        <li>
+            <span class="expand-icon">+</span> About
+            <ul class="collapsible">
+                <li>Company</li>
+                <li>Team</li>
+                <li>Mission</li>
+            </ul>
+        </li>
+        <li>
+            <span class="expand-icon">+</span> Services
+            <ul class="collapsible">
+                <li>Web Development</li>
+                <li>App Development</li>
+                <li>SEO Services</li>
+            </ul>
+        </li>
+        <li>
+            <span class="expand-icon">+</span> Contact
+        </li>
+    </ul>
+
+    <script>
+        function toggleMenu(event) {
+            const subMenu = event.target.nextElementSibling;
+            const icon = event.target;
+
+            if (subMenu && subMenu.classList.contains("collapsible")) {
+                subMenu.style.display = subMenu.style.display === "block" ? "none" : "block";
+                icon.textContent = subMenu.style.display === "block" ? "−" : "+";
+            }
+        }
+
+        const menuItems = document.querySelectorAll("li > .expand-icon");
+        menuItems.forEach(item => {
+            item.addEventListener("click", toggleMenu);
+        });
+    </script>
+
+</body>
+</html>

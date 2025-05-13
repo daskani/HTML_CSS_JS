@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Items by Category</title>
+    <style>
+        .item {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>Filter Items by Category</h2>
+    <label for="category">Choose a category:</label>
+    <select id="category" onchange="filterItems()">
+        <option value="all">All</option>
+        <option value="fruits">Fruits</option>
+        <option value="vegetables">Vegetables</option>
+        <option value="dairy">Dairy</option>
+    </select>
+    <div id="item-list">
+        <div class="item" data-category="fruits">Apple</div>
+        <div class="item" data-category="fruits">Banana</div>
+        <div class="item" data-category="vegetables">Carrot</div>
+        <div class="item" data-category="vegetables">Broccoli</div>
+        <div class="item" data-category="dairy">Milk</div>
+        <div class="item" data-category="dairy">Cheese</div>
+        <div class="item" data-category="fruits">Orange</div>
+    </div>
+
+    <script>
+        function filterItems(){
+            const category = document.getElementById('category').value;
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none'; 
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

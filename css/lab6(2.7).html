@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stock Ticker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background: #222;
+            color: white;
+            padding: 10px 0;
+            position: relative;
+            white-space: nowrap;
+        }
+        .ticker {
+            display: flex;
+            animation: tickerMove 15s linear infinite;
+        }
+        .ticker span {
+            padding: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        @keyframes tickerMove {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Live Stock Ticker</h1>
+    <div class="ticker-container">
+        <div class="ticker" id="ticker"></div>
+    </div>
+
+    <script>
+        async function fetchStockData() {
+            const stocks = ["AAPL", "GOOGL", "AMZN", "TSLA", "MSFT"];
+            const tickerDiv = document.getElementById("ticker");
+
+            try{
+                let stockData = stocks.map(symbol => ({
+                    symbol,
+                    price: (Math.random() * 1000).toFixed(2),
+                    change: ((Math.random() - 0.5) * 10).toFixed(2) 
+                }));
+
+                tickerDiv.innerHTML = stockData.map(stock => {
+                    let color = stock.change >= 0 ? "green" : "red";
+                    return `<span>${stock.symbol}: $${stock.price} <span style="color:${color}">(${stock.change}%)</span></span>`;
+                }).join("");
+
+            } catch (error) {
+                tickerDiv.innerHTML = "<span>Error fetching stock data</span>";
+            }
+        }
+        fetchStockData();
+        setInterval(fetchStockData, 5000);
+    </script>
+
+</body>
+</html>

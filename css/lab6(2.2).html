@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Quiz System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #0073e6;
+        }
+        .quiz-box {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .options button:hover {
+            background: #005bb5;
+        }
+        .timer {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            margin: 10px 0;
+        }
+        #result {
+            display: none;
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Timed Quiz</h1>
+
+        <div class="quiz-box" id="quizBox">
+            <p class="question" id="questionText"></p>
+            <div class="options" id="optionsContainer"></div>
+            <p class="timer">Time Left: <span id="timer">10</span> seconds</p>
+        </div>
+
+        <div id="result">
+            <h2>Quiz Completed!</h2>
+            <p id="scoreText"></p>
+            <p id="timeTakenText"></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+            { question: "Which planet is known as the Red Planet?", options: ["Earth", "Venus", "Mars", "Jupiter"], answer: "Mars" },
+            { question: "Who wrote 'Hamlet'?", options: ["Shakespeare", "Dickens", "Austen", "Hemingway"], answer: "Shakespeare" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timeLeft = 10;
+        let timer;
+        let startTime;
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizData.length) {
+                endQuiz();
+                return;
+            }
+
+            let questionObj = quizData[currentQuestionIndex];
+            document.getElementById("questionText").textContent = questionObj.question;
+
+            let optionsContainer = document.getElementById("optionsContainer");
+            optionsContainer.innerHTML = "";
+
+            questionObj.options.forEach(option => {
+                let btn = document.createElement("button");
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(btn);
+            });
+
+            timeLeft = 10;
+            document.getElementById("timer").textContent = timeLeft;
+
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function checkAnswer(selectedOption) {
+            clearInterval(timer);
+            let correctAnswer = quizData[currentQuestionIndex].answer;
+
+            if (selectedOption === correctAnswer) {
+                score++;
+            }
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function endQuiz() {
+            clearInterval(timer);
+            let endTime = new Date().getTime();
+            let timeTaken = Math.round((endTime - startTime) / 1000);
+
+            document.getElementById("quizBox").style.display = "none";
+            document.getElementById("result").style.display = "block";
+            document.getElementById("scoreText").textContent = `Your Score: ${score} / ${quizData.length}`;
+            document.getElementById("timeTakenText").textContent = `Total Time Taken: ${timeTaken} seconds`;
+        }
+
+        function startQuiz() {
+            startTime = new Date().getTime();
+            loadQuestion();
+        }
+
+        startQuiz();
+    </script>
+
+</body>
+</html>

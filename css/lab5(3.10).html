@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Text Synchronization</title>
+    <style>
+        textarea {
+            width: 300px;
+            height: 150px;
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Real-Time Text Synchronization</h2>
+    <textarea id="textArea1" placeholder="Type here..."></textarea>
+    <textarea id="textArea2" placeholder="Text Area 2 (synchronized)" readonly></textarea>
+    <script>
+        const textArea1 = document.getElementById("textArea1");
+        const textArea2 = document.getElementById("textArea2");
+
+        textArea1.addEventListener("input", function() {
+            textArea2.value = textArea1.value;
+        });
+    </script>
+</body>
+</html>

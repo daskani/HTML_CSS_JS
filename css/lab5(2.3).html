@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shopping Cart</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 60%; margin: auto; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; }
+        input, button { padding: 10px; margin: 5px; }
+        .remove-btn { background: red; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Shopping Cart</h2>
+
+    <input type="text" id="item" placeholder="Item Name">
+    <input type="number" id="qty" placeholder="Quantity" min="1">
+    <button onclick="addItem()">Add</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="cart"></tbody>
+    </table>
+
+    <script>
+        function addItem() {
+            let itemName = document.getElementById("item").value.trim();
+            let itemQty = document.getElementById("qty").value.trim();
+
+            if (itemName === "" || itemQty === "" || itemQty <= 0) return;
+
+            let row = `<tr>
+                <td>${itemName}</td>
+                <td><input type="number" value="${itemQty}" min="1" onchange="updateQty(this)"></td>
+                <td><button class="remove-btn" onclick="removeItem(this)">Remove</button></td>
+            </tr>`;
+
+            document.getElementById("cart").innerHTML += row;
+            document.getElementById("item").value = "";
+            document.getElementById("qty").value = "";
+        }
+
+        function removeItem(btn) {
+            btn.parentElement.parentElement.remove();
+        }
+
+        function updateQty(input) {
+            if (input.value <= 0) input.value = 1;
+        }
+    </script>
+
+</body>
+</html>

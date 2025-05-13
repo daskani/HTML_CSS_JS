@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Feed Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .post {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .comments {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Social Media Feed</h2>
+    <div id="feed">
+        <div class="post">
+            <p><strong>User1:</strong> This is my first post!</p>
+            <div class="buttons">
+                <button onclick="likePost(this)">Like (<span>0</span>)</button>
+                <button onclick="toggleComment(this)">Comment</button>
+            </div>
+            <div class="comments" style="display: none;">
+                <input type="text" placeholder="Add a comment" onkeypress="addComment(event, this)">
+                <div class="comment-list"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function likePost(button) {
+            let span = button.querySelector("span");
+            span.textContent = parseInt(span.textContent) + 1;
+        }
+
+        function toggleComment(button) {
+            let commentSection = button.parentElement.nextElementSibling;
+            commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addComment(event, input) {
+            if (event.key === "Enter" && input.value.trim() !== "") {
+                let commentList = input.nextElementSibling;
+                let comment = document.createElement("p");
+                comment.textContent = input.value;
+                commentList.appendChild(comment);
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

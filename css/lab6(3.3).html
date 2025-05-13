@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Kanban Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            background-color: #f4f7fa;
+        }
+        .kanban-board {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+            overflow-x: auto;
+        }
+        .kanban-column {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            width: 30%;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .kanban-column h2 {
+            text-align: center;
+            color: #333;
+        }
+        .task {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: move;
+        }
+        .kanban-column div {
+            min-height: 50px;
+        }
+        .kanban-column .empty-column {
+            border: 2px dashed #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .kanban-column .task:hover {
+            background-color: #e0e0e0;
+        }
+        @media (max-width: 768px) {
+            .kanban-board {
+                flex-direction: column;
+                align-items: center;
+            }
+            .kanban-column {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kanban-board">
+        <div class="kanban-column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>To Do</h2>
+            <div id="todo-tasks" class="task-container">
+                <div class="task" id="task1" draggable="true" ondragstart="drag(event)">
+                    Task 1
+                </div>
+                <div class="task" id="task2" draggable="true" ondragstart="drag(event)">
+                    Task 2
+                </div>
+            </div>
+            <div class="empty-column">Drop tasks here</div>
+        </div>
+
+        <div class="kanban-column" id="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>In Progress</h2>
+            <div id="in-progress-tasks" class="task-container">
+                <div class="empty-column">Drop tasks here</div>
+            </div>
+        </div>
+
+        <div class="kanban-column" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Done</h2>
+            <div id="done-tasks" class="task-container">
+                <div class="empty-column">Drop tasks here</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        function drag(event){
+            event.dataTransfer.setData("task", event.target.id);
+        }
+        function drop(event) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData("task");
+            const task = document.getElementById(taskId);
+            const targetColumn = event.target;
+            if (targetColumn.className === 'empty-column') {
+                targetColumn = targetColumn.parentNode; 
+            }
+            targetColumn.appendChild(task);
+            task.style.backgroundColor = '#e0f7fa';
+        }
+        function addTask(content) {
+            const taskContainer = document.getElementById("todo-tasks");
+            const taskId = 'task' + (taskContainer.children.length + 1);
+            const taskDiv = document.createElement("div");
+            taskDiv.className = "task";
+            taskDiv.id = taskId;
+            taskDiv.draggable = true;
+            taskDiv.ondragstart = function(event) { drag(event) };
+            taskDiv.innerText = content;
+            taskContainer.appendChild(taskDiv);
+        }
+        setTimeout(() => {
+            addTask("New Task dynamically added");
+        }, 5000);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        #task-container { max-width: 400px; margin: auto; }
+        input, select, button { display: block; width: 100%; margin-top: 10px; padding: 10px; }
+        .task-item { padding: 10px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; }
+        .completed { text-decoration: line-through; color: gray; }
+    </style>
+</head>
+<body>
+    <h2>Task Manager</h2>
+    <div id="task-container">
+        <input type="text" id="task-name" placeholder="Enter task">
+        <select id="task-priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+        <button onclick="addTask()">Add Task</button>
+        <h3>Tasks</h3>
+        <div id="task-list"></div>
+    </div>
+    <script>
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            displayTasks(tasks);
+        }
+        function addTask() {
+            const taskName = document.getElementById("task-name").value;
+            const taskPriority = document.getElementById("task-priority").value;
+            if (!taskName) return alert("Please enter a task!");
+            
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push({ name: taskName, priority: taskPriority, completed: false });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            displayTasks(tasks);
+            document.getElementById("task-name").value = "";
+        }
+        function displayTasks(tasks) {
+            const taskList = document.getElementById("task-list");
+            taskList.innerHTML = "";
+            tasks.sort((a, b) => (a.priority > b.priority) ? -1 : 1);
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement("div");
+                taskItem.classList.add("task-item");
+                if (task.completed) taskItem.classList.add("completed");
+                taskItem.innerHTML = `
+                    <span>${task.name} (${task.priority})</span>
+                    <button onclick="toggleComplete(${index})">${task.completed ? "Undo" : "Complete"}</button>
+                `;
+                taskList.appendChild(taskItem);
+            });
+        }
+        function toggleComplete(index) {
+            let tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks[index].completed = !tasks[index].completed;
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            displayTasks(tasks);
+        }
+        loadTasks();
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hover Description</title>
+    <style>
+        .image-container {
+            text-align: center;
+            margin: 20px;
+            display: inline-block;
+            position: relative;
+        }
+        .description {
+            display: none;
+            position: absolute;
+            bottom: -20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            width: 100%;
+            text-align: center;
+        }
+        img {
+            width: 300px;
+            height: auto;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Hover Over an Image to See Description</h2>
+
+    <div class="image-container">
+        <img src="https://via.placeholder.com/300x200?text=Image+1" alt="Image 1">
+        <div class="description">This is Image 1 description</div>
+    </div>
+
+    <div class="image-container">
+        <img src="https://via.placeholder.com/300x200?text=Image+2" alt="Image 2">
+        <div class="description">This is Image 2 description</div>
+    </div>
+
+    <div class="image-container">
+        <img src="https://via.placeholder.com/300x200?text=Image+3" alt="Image 3">
+        <div class="description">This is Image 3 description</div>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.image-container');
+
+        images.forEach(image => {
+            const description = image.querySelector('.description');
+            
+            image.addEventListener('mouseover', function() {
+                description.style.display = 'block';
+            });
+
+            image.addEventListener('mouseout', function() {
+                description.style.display = 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>

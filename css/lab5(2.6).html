@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Character Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .counter {
+            font-size: 16px;
+        }
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Real-Time Character Counter</h2>
+    <textarea id="textArea" maxlength="200" placeholder="Start typing..."></textarea><br>
+    <span class="counter" id="charCount">0 / 200</span>
+    <p id="warningMessage" class="warning" style="display: none;">Warning: You are about to reach the character limit!</p>
+
+    <script>
+        const maxCharLimit = 200;
+        const textArea = document.getElementById("textArea");
+        const charCount = document.getElementById("charCount");
+        const warningMessage = document.getElementById("warningMessage");
+
+        textArea.addEventListener("input", function() {
+            const currentLength = textArea.value.length;
+            charCount.textContent = `${currentLength} / ${maxCharLimit}`;
+            if (currentLength >= maxCharLimit - 20) {
+                warningMessage.style.display = "block";
+            } else {
+                warningMessage.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

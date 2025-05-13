@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Lists</title>
+</head>
+<body>
+
+    <h2>Drag and Drop Items</h2>
+
+    <ul id="list1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <li id="item1" draggable="true" ondragstart="drag(event)">Item 1</li>
+        <li id="item2" draggable="true" ondragstart="drag(event)">Item 2</li>
+        <li id="item3" draggable="true" ondragstart="drag(event)">Item 3</li>
+    </ul>
+
+    <ul id="list2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <li id="item4" draggable="true" ondragstart="drag(event)">Item 4</li>
+        <li id="item5" draggable="true" ondragstart="drag(event)">Item 5</li>
+        <li id="item6" draggable="true" ondragstart="drag(event)">Item 6</li>
+    </ul>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var draggedElement = document.getElementById(data);
+            event.target.appendChild(draggedElement);
+        }
+    </script>
+
+</body>
+</html>

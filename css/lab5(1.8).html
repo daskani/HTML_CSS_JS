@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Dropdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        select {
+            padding: 8px;
+            font-size: 16px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Dropdown Menu</h2>
+    <label for="category">Choose a Category:</label>
+    <select id="category">
+        <option value="">Select a category</option>
+        <option value="fruits">Fruits</option>
+        <option value="vehicles">Vehicles</option>
+    </select>
+    <label for="subcategory">Choose a Subcategory:</label>
+    <select id="subcategory">
+        <option value="">Select a subcategory</option>
+    </select>
+    <script>
+        const subcategories = {
+            fruits: ["Apple", "Banana", "Orange", "Mango"],
+            vehicles: ["Car", "Bike", "Truck", "Bus"]
+        };
+
+        const categoryDropdown = document.getElementById("category");
+        const subcategoryDropdown = document.getElementById("subcategory");
+
+        categoryDropdown.addEventListener("change", function() {
+            const selectedCategory = this.value;
+            subcategoryDropdown.innerHTML = "<option value=''>Select a subcategory</option>";
+
+            if (selectedCategory && subcategories[selectedCategory]) {
+                subcategories[selectedCategory].forEach(sub => {
+                    let option = document.createElement("option");
+                    option.value = sub.toLowerCase();
+                    option.textContent = sub;
+                    subcategoryDropdown.appendChild(option);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

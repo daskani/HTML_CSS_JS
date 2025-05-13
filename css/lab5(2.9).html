@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Gallery</title>
+</head>
+<body>
+
+    <h2>Simple Image Gallery</h2>
+
+    <img id="galleryImage" src="https://via.placeholder.com/600x400?text=Image+1" alt="Image" style="width:100%; max-width:600px;">
+    
+    <br><br>
+
+    <button onclick="changeImage(-1)">Previous</button>
+    <button onclick="changeImage(1)">Next</button>
+
+    <script>
+        const images = [
+            "https://via.placeholder.com/600x400?text=Image+1",
+            "https://via.placeholder.com/600x400?text=Image+2",
+            "https://via.placeholder.com/600x400?text=Image+3",
+            "https://via.placeholder.com/600x400?text=Image+4"
+        ];
+
+        let currentImageIndex = 0;
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            document.getElementById("galleryImage").src = images[currentImageIndex];
+        }
+    </script>
+
+</body>
+</html>

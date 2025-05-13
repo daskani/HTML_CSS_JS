@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Tabbed Interface</title>
+</head>
+<body>
+    <h1>Simple Tabbed Interface</h1>
+    <div>
+        <button onclick="showTab('tab1')">Tab 1</button>
+        <button onclick="showTab('tab2')">Tab 2</button>
+        <button onclick="showTab('tab3')">Tab 3</button>
+    </div>
+    <div id="tab1" style="display:block;">
+        <h2>Content for Tab 1</h2>
+        <p>This is the content displayed when Tab 1 is selected.</p>
+    </div>
+
+    <div id="tab2" style="display:none;">
+        <h2>Content for Tab 2</h2>
+        <p>This is the content displayed when Tab 2 is selected.</p>
+    </div>
+
+    <div id="tab3" style="display:none;">
+        <h2>Content for Tab 3</h2>
+        <p>This is the content displayed when Tab 3 is selected.</p>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.getElementById('tab1').style.display = 'none';
+            document.getElementById('tab2').style.display = 'none';
+            document.getElementById('tab3').style.display = 'none';
+            document.getElementById(tabId).style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

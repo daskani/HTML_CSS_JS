@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Rotation</title>
+    <style>
+        #image-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Image Rotation Example</h2>
+    <div id="image-container">
+        <img src="https://via.placeholder.com/600x400/ff7f7f/333333?text=Image+1" alt="Image 1" class="rotating-images">
+        <img src="https://via.placeholder.com/600x400/7f7fff/333333?text=Image+2" alt="Image 2" class="rotating-images">
+        <img src="https://via.placeholder.com/600x400/7fff7f/333333?text=Image+3" alt="Image 3" class="rotating-images">
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.rotating-images');
+        let currentIndex = 0;
+        function showImage(index) {
+             image.style.display = 'none';
+            images[index].style.display = 'block';
+        }
+        function rotateImages() {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }, 3000);
+        }
+        showImage(currentIndex);
+        rotateImages();
+    </script>
+
+</body>
+</html>

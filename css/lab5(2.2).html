@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Bar Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .chart-container {
+            width: 60%;
+            margin: auto;
+            display: flex;
+            align-items: flex-end;
+            height: 300px;
+            border-left: 2px solid black;
+            border-bottom: 2px solid black;
+            padding: 10px;
+            justify-content: space-around;
+        }
+        .bar {
+            width: 40px;
+            background-color: blue;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition: height 0.5s ease-in-out;
+        }
+        input {
+            padding: 8px;
+            width: 60%;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Numbers to Generate a Bar Chart</h2>
+    <input type="text" id="numberInput" placeholder="Enter numbers separated by commas (e.g., 10, 50, 30)">
+    <button onclick="generateChart()">Generate Chart</button>
+
+    <div class="chart-container" id="chart"></div>
+
+    <script>
+        function generateChart() {
+            const input = document.getElementById("numberInput").value;
+            const numbers = input.split(",").map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            const chartContainer = document.getElementById("chart");
+            chartContainer.innerHTML = "";
+
+            const maxNumber = Math.max(...numbers) || 100;
+            
+            numbers.forEach(num => {
+                const bar = document.createElement("div");
+                bar.classList.add("bar");
+                bar.style.height = (num / maxNumber) * 100 + "%";
+                bar.textContent = num;
+                chartContainer.appendChild(bar);
+            });
+        }
+    </script>
+
+</body>
+</html>
