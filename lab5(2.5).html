@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Search Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 60%;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Search Bar</h2>
+    <input type="text" id="search" onkeyup="filterItems()" placeholder="Search items...">
+    <ul id="itemList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+        <li>Date</li>
+        <li>Grape</li>
+        <li>Lemon</li>
+        <li>Mango</li>
+        <li>Orange</li>
+        <li>Peach</li>
+        <li>Pineapple</li>
+    </ul>
+    <script>
+        function filterItems() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const items = document.querySelectorAll("#itemList li");
+            
+            items.forEach(item => {
+                const itemText = item.textContent.toLowerCase();
+                if (itemText.includes(searchTerm)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

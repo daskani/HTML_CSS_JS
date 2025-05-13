@@ -1,0 +1,28 @@
+<html>
+<body>
+    <h2>Convert String Case</h2>
+    <label for="inputText">Enter a string:</label>
+    <input type="text" id="inputText">
+    <br><br>
+    <label for="caseSelect">Select case:</label>
+    <select id="caseSelect">
+        <option value="uppercase">Uppercase</option>
+        <option value="lowercase">Lowercase</option>
+    </select>
+    <button onclick="convertCase()">Convert</button>
+    <h3>Converted String: <span id="resultText"></span></h3>
+    <script>
+        function convertCase(){
+            const inputText = document.getElementById("inputText").value;
+            const caseSelection = document.getElementById("caseSelect").value;
+            let resultText = '';
+            if (caseSelection === "uppercase"){
+                resultText = inputText.toUpperCase();
+            } else if (caseSelection === "lowercase"){
+                resultText = inputText.toLowerCase();
+            }
+            document.getElementById("resultText").textContent = resultText;
+        }
+    </script>
+</body>
+</html>

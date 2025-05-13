@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 18px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h2>Click to Mark as Completed</h2>
+    <ul id="taskList">
+        <li>Buy groceries</li>
+        <li>Complete assignment</li>
+        <li>Go for a walk</li>
+        <li>Read a book</li>
+    </ul>
+    <script>
+        document.querySelectorAll("li").forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("completed");
+            });
+        });
+    </script>
+</body>
+</html>

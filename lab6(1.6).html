@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Polling System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .poll-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    #poll-options {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #poll-results {
+      margin-top: 20px;
+    }
+
+    #results-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #results-list li {
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="poll-container">
+    <h2>What is your favorite color?</h2>
+    <div id="poll-options">
+      <label>
+        <input type="radio" name="color" value="Red"> Red
+      </label>
+      <label>
+        <input type="radio" name="color" value="Blue"> Blue
+      </label>
+      <label>
+        <input type="radio" name="color" value="Green"> Green
+      </label>
+      <label>
+        <input type="radio" name="color" value="Yellow"> Yellow
+      </label>
+    </div>
+
+    <button id="vote-button">Vote</button>
+
+    <div id="poll-results">
+      <h3>Poll Results:</h3>
+      <ul id="results-list">
+        <li>Red: 0 votes</li>
+        <li>Blue: 0 votes</li>
+        <li>Green: 0 votes</li>
+        <li>Yellow: 0 votes</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const pollData = {
+      Red: 0,
+      Blue: 0,
+      Green: 0,
+      Yellow: 0
+    };
+    function loadPollResults() {
+      const storedResults = JSON.parse(localStorage.getItem('pollResults'));
+      if (storedResults) {
+        Object.assign(pollData, storedResults);
+      }
+      updatePollResults();
+    }
+    function updatePollResults() {
+      const resultsList = document.getElementById('results-list');
+      resultsList.innerHTML = '';
+      
+      Object.keys(pollData).forEach(option => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${option}: ${pollData[option]} votes`;
+        resultsList.appendChild(listItem);
+      });
+    }
+    document.getElementById('vote-button').addEventListener('click', function () {
+      const selectedOption = document.querySelector('input[name="color"]:checked');
+      
+      if (selectedOption) {
+        const vote = selectedOption.value;
+        pollData[vote]++;
+        localStorage.setItem('pollResults', JSON.stringify(pollData));
+        updatePollResults();
+      } else {
+        alert('Please select an option before voting!');
+      }
+    });
+    window.onload = loadPollResults;
+  </script>
+
+</body>
+</html>

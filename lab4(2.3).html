@@ -1,0 +1,20 @@
+<html>
+<body>
+    <h2>Change Font Style</h2>
+    <label for="fontSelect">Select a font style:</label>
+    <select id="fontSelect" onchange="changeFont()">
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Verdana">Verdana</option>
+    </select>
+    <p id="text">This is a sample text. Select a font style from the dropdown.</p>
+    <script>
+        function changeFont() {
+            const selectedFont = document.getElementById("fontSelect").value;
+            document.getElementById("text").style.fontFamily = selectedFont;
+        }
+    </script>
+</body>
+</html>

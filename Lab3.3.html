@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Vegetable Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .cart-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .cart-item img {
+            max-width: 100px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .cart-item h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .cart-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .cart-item input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .cart-item button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .cart-item button:hover {
+            background-color: #218838;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fresh Vegetable Cart</h1>
+        <p>Healthy and fresh vegetables delivered to your door.</p>
+    </header>
+
+    <div class="container">
+        <div class="cart-item">
+            <img src="carrot.jpg" alt="Carrot">
+            <div>
+                <h3>Carrot</h3>
+                <p>Price: $2 per kg</p>
+                <input type="number" min="0" placeholder="Qty">
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart-item">
+            <img src="tomato.jpg" alt="Tomato">
+            <div>
+                <h3>Tomato</h3>
+                <p>Price: $1.5 per kg</p>
+                <input type="number" min="0" placeholder="Qty">
+                <button>Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart-item">
+            <img src="potato.jpg" alt="Potato">
+            <div>
+                <h3>Potato</h3>
+                <p>Price: $1 per kg</p>
+                <input type="number" min="0" placeholder="Qty">
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Fresh Vegetable Cart. All rights reserved.</p>
+    </footer>
+</body>
+</html>

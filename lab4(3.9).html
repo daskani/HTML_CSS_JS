@@ -1,0 +1,25 @@
+<html>
+<body>
+    <h2>Display Name Letter by Letter</h2>
+    <label for="nameInput">Enter your name:</label>
+    <input type="text" id="nameInput">
+    <button onclick="displayName()">Display Name</button>
+    <p id="animatedName"></p>
+    <script>
+        function displayName(){
+            const name = document.getElementById("nameInput").value;
+            let index = 0;
+            const displayElement = document.getElementById("animatedName");
+            displayElement.textContent = '';
+            const interval = setInterval(function(){
+                if (index < name.length){
+                    displayElement.textContent += name[index];
+                    index++;
+                }else{
+                    clearInterval(interval);
+                }
+            }, 300);
+        }
+    </script>
+</body>
+</html>

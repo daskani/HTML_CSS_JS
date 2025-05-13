@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Button Effect</title>
+    <style>
+        #hoverButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="hoverButton">Hover Me</button>
+
+    <script>
+        let button = document.getElementById("hoverButton");
+
+        button.addEventListener("mouseover", function() {
+            button.style.backgroundColor = "red";
+            button.style.color = "yellow";
+            button.textContent = "Hovered!";
+        });
+
+        button.addEventListener("mouseout", function() {
+            button.style.backgroundColor = "blue";
+            button.style.color = "white";
+            button.textContent = "Hover Me";
+        });
+    </script>
+
+</body>
+</html>

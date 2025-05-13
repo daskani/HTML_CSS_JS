@@ -1,0 +1,13 @@
+<html>
+<body>
+    <button onclick="toggleImage()">Toggle Image</button>
+    <img id="image" src="" style="display: block;">
+    
+    <script>
+        function toggleImage() {
+            const img = document.getElementById("image");
+            img.style.display = img.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<html>
+<body>
+    <h2>Word Count Program</h2>
+    <label for="sentence">Enter a sentence:</label>
+    <input type="text" id="sentence" oninput="countWords()">
+    <p>Word count: <span id="wordCount">0</span></p>
+    <script>
+        function countWords(){
+            const sentence = document.getElementById("sentence").value;
+            const words = sentence.trim().split(/\s+/);
+            const wordCount = words.length === 1 && words[0] === "" ? 0 : words.length;
+            document.getElementById("wordCount").textContent = wordCount;
+        }
+    </script>
+</body>
+</html>

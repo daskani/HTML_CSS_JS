@@ -1,0 +1,26 @@
+<html>
+<body>
+    <h2>Search and Highlight Keyword in Paragraphs</h2>
+    <label for="search">Enter keyword to search:</label>
+    <input type="text" id="search" oninput="highlightKeyword()">
+    <div>
+        <p>This is a sample paragraph.</p>
+        <p>This paragraph contains the keyword JavaScript.</p>
+        <p>Another paragraph without the keyword.</p>
+        <p>Yet another paragraph with the word JavaScript inside it.</p>
+    </div>
+    <script>
+        function highlightKeyword(){
+            const keyword = document.getElementById("search").value.toLowerCase();
+            const paragraphs = document.querySelectorAll("p");
+            paragraphs.forEach(function(paragraph) {
+                if (paragraph.textContent.toLowerCase().includes(keyword)){
+                    paragraph.style.backgroundColor = "yellow";
+                } else {
+                    paragraph.style.backgroundColor = "";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

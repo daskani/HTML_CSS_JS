@@ -1,0 +1,13 @@
+<html>
+<body>
+    <h2>Select an Option</h2>
+    <select id="options" onchange="document.getElementById('message').textContent = 'You selected ' + this.value;">
+        <option value="">Select...</option>
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+    </select>
+
+    <p id="message"></p>
+</body>
+</html>

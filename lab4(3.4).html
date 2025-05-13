@@ -1,0 +1,19 @@
+<html>
+<body>
+    <h2>Toggle Text Visibility</h2>
+    <button onclick="toggleText()">Show/Hide Text</button>
+    <div id="textBlock" style="display:none;">
+        <p>This is the block of text that will be toggled.</p>
+    </div>
+    <script>
+        function toggleText() {
+            const textBlock = document.getElementById("textBlock");
+            if (textBlock.style.display === "none") {
+                textBlock.style.display = "block";
+            } else {
+                textBlock.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

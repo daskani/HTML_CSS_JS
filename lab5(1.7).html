@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Modal Dialog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            margin: 20% auto;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Simple Modal Example</h2>
+    <button id="openModal">Open Modal</button>
+    <div class="modal" id="modalBox">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p>This is a modal dialog box!</p>
+        </div>
+    </div>
+    <script>
+        let modal = document.getElementById("modalBox");
+        let openButton = document.getElementById("openModal");
+        let closeButton = document.getElementById("closeModal");
+        openButton.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+        closeButton.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

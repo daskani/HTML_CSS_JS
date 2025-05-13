@@ -1,0 +1,19 @@
+<html>
+<body>
+    <h2>Enable/Disable Button Based on Input</h2>
+    <label for="textInput">Enter something:</label>
+    <input type="text" id="textInput" oninput="toggleButton()">
+    <button id="submitButton" disabled>Submit</button>
+    <script>
+        function toggleButton() {
+            const input = document.getElementById("textInput").value;
+            const button = document.getElementById("submitButton");
+            if (input.trim() !== "") {
+                button.disabled = false;
+            } else {
+                button.disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>

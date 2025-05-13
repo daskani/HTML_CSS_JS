@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Chat Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    #chat-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    #messages {
+      height: 300px;
+      overflow-y: scroll;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #message-input {
+      width: calc(100% - 70px);
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    #send-btn {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #send-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <input type="text" id="message-input" placeholder="Type a message..." />
+    <button id="send-btn">Send</button>
+  </div>
+  <script>
+    const socket = new WebSocket('ws://localhost:3000');
+    const messageInput = document.getElementById('message-input');
+    const sendBtn = document.getElementById('send-btn');
+    const messagesContainer = document.getElementById('messages');
+    socket.onmessage = function (event) {
+      const message = event.data;
+      const messageElement = document.createElement('div');
+      messageElement.textContent = message;
+      messagesContainer.appendChild(messageElement);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+    sendBtn.onclick = function () {
+      const message = messageInput.value.trim();
+      if (message) {
+        socket.send(message);
+        messageInput.value = '';
+      }
+    };
+    messageInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        sendBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>

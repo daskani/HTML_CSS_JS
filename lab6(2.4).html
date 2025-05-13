@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0073e6;
+            margin-bottom: 20px;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #0073e6;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+        .recommendations {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Recommendation System</h1>
+        
+        <label for="category">Choose Category:</label>
+        <select id="category" onchange="updateGenres()">
+            <option value="books">Books</option>
+            <option value="movies">Movies</option>
+        </select>
+
+        <label for="genre">Choose Genre:</label>
+        <select id="genre">
+        </select>
+
+        <button onclick="getRecommendations()">Get Recommendations</button>
+
+        <div class="recommendations" id="recommendations"></div>
+    </div>
+
+    <script>
+        const data = {
+            books: {
+                Fiction: ["The Great Gatsby", "To Kill a Mockingbird", "1984"],
+                Mystery: ["Gone Girl", "Sherlock Holmes", "The Girl with the Dragon Tattoo"],
+                Fantasy: ["Harry Potter", "The Hobbit", "Percy Jackson"],
+                Science: ["A Brief History of Time", "Sapiens", "The Selfish Gene"]
+            },
+            movies: {
+                Action: ["Mad Max: Fury Road", "John Wick", "Gladiator"],
+                Comedy: ["The Hangover", "Superbad", "Step Brothers"],
+                Horror: ["The Conjuring", "It", "A Quiet Place"],
+                SciFi: ["Inception", "The Matrix", "Interstellar"]
+            }
+        };
+
+        function updateGenres() {
+            let category = document.getElementById("category").value;
+            let genreSelect = document.getElementById("genre");
+
+            genreSelect.innerHTML = "";
+
+            Object.keys(data[category]).forEach(genre => {
+                let option = document.createElement("option");
+                option.value = genre;
+                option.textContent = genre;
+                genreSelect.appendChild(option);
+            });
+        }
+
+        function getRecommendations() {
+            let category = document.getElementById("category").value;
+            let genre = document.getElementById("genre").value;
+            let recommendations = data[category][genre];
+
+            let recommendationsDiv = document.getElementById("recommendations");
+            recommendationsDiv.innerHTML = `<h3>Recommended ${category} in ${genre}:</h3><ul>` + 
+                recommendations.map(item => `<li>${item}</li>`).join('') + `</ul>`;
+        }
+        updateGenres();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0073e6;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        .image-container {
+            margin-top: 10px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 300px;
+        }
+        img {
+            max-width: 100%;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .controls {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .controls button, .controls input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button {
+            background: #0073e6;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Image Editor</h1>
+        <input type="file" id="upload" accept="image/*">
+        <div class="image-container">
+            <img id="image" src="" alt="Upload an image">
+        </div>
+        
+        <div class="controls">
+            <button onclick="zoomIn()">Zoom In</button>
+            <button onclick="zoomOut()">Zoom Out</button>
+            <button onclick="resetImage()">Reset</button>
+        </div>
+
+        <div class="controls">
+            <label>Brightness:</label>
+            <input type="range" id="brightness" min="0" max="200" value="100" onchange="applyFilters()">
+        </div>
+
+        <div class="controls">
+            <label>Contrast:</label>
+            <input type="range" id="contrast" min="50" max="200" value="100" onchange="applyFilters()">
+        </div>
+
+        <div class="controls">
+            <button onclick="applyFilter('grayscale(100%)')">Grayscale</button>
+            <button onclick="applyFilter('sepia(100%)')">Sepia</button>
+            <button onclick="applyFilter('none')">Remove Filters</button>
+        </div>
+    </div>
+
+    <script>
+        let image = document.getElementById("image");
+        let scale = 1;
+        let brightness = 100;
+        let contrast = 100;
+        let currentFilter = "none";
+
+        document.getElementById("upload").addEventListener("change", function(event) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                image.src = e.target.result;
+                image.style.transform = "scale(1)";
+                image.style.filter = "none";
+                scale = 1;
+                brightness = 100;
+                contrast = 100;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        function zoomIn() {
+            scale += 0.1;
+            image.style.transform = `scale(${scale})`;
+        }
+
+        function zoomOut() {
+            if (scale > 0.5) {
+                scale -= 0.1;
+                image.style.transform = `scale(${scale})`;
+            }
+        }
+
+        function applyFilters() {
+            brightness = document.getElementById("brightness").value;
+            contrast = document.getElementById("contrast").value;
+            image.style.filter = `${currentFilter} brightness(${brightness}%) contrast(${contrast}%)`;
+        }
+
+        function applyFilter(filter) {
+            currentFilter = filter;
+            applyFilters();
+        }
+
+        function resetImage() {
+            scale = 1;
+            brightness = 100;
+            contrast = 100;
+            currentFilter = "none";
+            image.style.transform = "scale(1)";
+            image.style.filter = "none";
+            document.getElementById("brightness").value = 100;
+            document.getElementById("contrast").value = 100;
+        }
+    </script>
+
+</body>
+</html>

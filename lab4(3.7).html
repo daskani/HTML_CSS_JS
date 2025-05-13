@@ -1,0 +1,19 @@
+<html>
+<body>
+    <h2>Increment/Decrement Counter</h2>
+    <button onclick="decrementCounter()">Decrement</button>
+    <span id="counterValue">0</span>
+    <button onclick="incrementCounter()">Increment</button>
+    <script>
+        let counter = 0;
+        function incrementCounter(){
+            counter++;
+            document.getElementById("counterValue").textContent = counter;
+        }
+        function decrementCounter(){
+            counter--;
+            document.getElementById("counterValue").textContent = counter;
+        }
+    </script>
+</body>
+</html>
